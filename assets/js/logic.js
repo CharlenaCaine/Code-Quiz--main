@@ -1,16 +1,16 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
+var time = questions.length * 10;
 var timerId;
 
 // variables to reference DOM elements
-var questionsEl = document.getElementById("questions");
-var timerEl = document.getElementById("time");
-var choicesEl = document.getElementById("choices");
-var submitBtn = document.getElementById("submit");
-var startBtn = document.getElementById("start");
-var initialsEl = document.getElementById("initials");
-var feedbackEl = document.getElementById("feedback");
+var questionsEId = document.getElementById("questions");
+var timerEId = document.getElementById("time");
+var choicesEId = document.getElementById("choices");
+var submitBtnEId = document.getElementById("submit");
+var startBtnEId = document.getElementById("start");
+var nameEId = document.getElementById("name");
+var feedbackEId = document.getElementById("feedback");
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
@@ -22,13 +22,13 @@ function startQuiz() {
   startScreen.setAttribute("class", "start hide");
 
   // un-hide questions section
-  questionsEl.setAttribute("class", " ");
+  questionsEId.setAttribute("class", " ");
   // start timer
   timerId = setInterval(function(){
     clockTick();
   }, 1000);
   // show starting time
-  timerEl.textContent = time;
+  timerEId.textContent = time;
 
   getQuestion();
 }
@@ -37,10 +37,13 @@ function getQuestion() {
   // get current question object from array
   var currentQuestion = questions[currentQuestionIndex];
   // update title with current question
-  questionsEl.children[0].textContent = currentQuestion.title;
+  questionsEId.children[0].textContent = currentQuestion.title;
   // clear out any old question choices
-  while (choicesEl.hasChildNodes()) {
-    choicesEl.removeChild(choicesEl.lastChild);
+  while (choicesEId
+  .hasChildNodes()) {
+    choicesEId
+  .removeChild(choicesEId
+    .lastChild);
   }
   // loop over choices
   for(var i = 0; i < currentQuestion.choices.length; i++){
@@ -50,20 +53,29 @@ function getQuestion() {
     choiceButton.textContent = currentQuestion.choices[i];
     
     // display on the page
-    choicesEl.appendChild(choiceButton);
+    choicesEId
+  .appendChild(choiceButton);
   }
   // attach click event listener to each choice
-  choicesEl.children[0].addEventListener("click", function(event){
-    questionClick(choicesEl.children[0]);
+  choicesEId
+.children[0].addEventListener("click", function(event){
+    questionClick(choicesEId
+    .children[0]);
   });
-  choicesEl.children[1].addEventListener("click", function(event){
-    questionClick(choicesEl.children[1]);
+  choicesEId
+.children[1].addEventListener("click", function(event){
+    questionClick(choicesEId
+    .children[1]);
   });
-  choicesEl.children[2].addEventListener("click", function(event){
-    questionClick(choicesEl.children[2]);
+  choicesEId
+.children[2].addEventListener("click", function(event){
+    questionClick(choicesEId
+    .children[2]);
   });
-  choicesEl.children[3].addEventListener("click", function(event){
-    questionClick(choicesEl.children[3]);
+  choicesEId
+.children[3].addEventListener("click", function(event){
+    questionClick(choicesEId
+    .children[3]);
   });
 }
 
@@ -73,21 +85,21 @@ function questionClick(answerChoice) {
     // penalize time
     time -= 10;
     // display new time on page
-    feedbackEl.textContent = "Incorrect";
+    feedbackEId.textContent = "Incorrect";
     // play "wrong" sound effect
     sfxWrong.play();
   }
   // else 
   else{
     // play "right" sound effect
-    feedbackEl.textContent = "Correct";
+    feedbackEId.textContent = "Correct";
     sfxRight.play();
   }
 
   // flash right/wrong feedback on page for half a second
-  feedbackEl.setAttribute("class", "feedback");
+  feedbackEId.setAttribute("class", "feedback");
   setInterval(function(){
-    feedbackEl.setAttribute("class", "feedback hide");
+    feedbackEId.setAttribute("class", "feedback hide");
   }, 500);
 
   // move to next question
@@ -106,7 +118,7 @@ function questionClick(answerChoice) {
 function quizEnd() {
   // stop timer
   clearInterval(timerId);
-  timerEl.textContent = time;
+  timerEId.textContent = time;
 
   // show end screen
   var endScreenEl = document.getElementById("end-screen");
@@ -117,13 +129,13 @@ function quizEnd() {
   finalScoreEl.textContent = time;
 
   // hide questions section
-  questionsEl.setAttribute("class", "hide");
+  questionsEId.setAttribute("class", "hide");
 }
 
 function clockTick() {
   // update time
   time--;
-  timerEl.textContent = time;
+  timerEId.textContent = time;
 
   // check if user ran out of time
   if(time <= 0)
@@ -133,14 +145,14 @@ function clockTick() {
 
 function saveHighscore() {
   // get value of input box
-  var initials = initialsEl.value.toUpperCase();
+  var name = nameEId.value.toUpperCase();
   // make sure value wasn't empty
-  if(initials === ""){ 
+  if(name === ""){ 
     alert("Input mustn't be blank'");
     return;
   }
-  else if(initials.length > 3){
-    alert("Input must be no more than 3 characters");
+  else if(name.length > 5){
+    alert("Input must be no more than 20 characters");
     return;
   }
   else{
@@ -152,7 +164,7 @@ function saveHighscore() {
       highscores = [];
     // format new score object for current user
     var newScore = {
-      initials: initials,
+      name: name,
       score: time
     };
     highscores.push(newScore);
@@ -170,10 +182,10 @@ function checkForEnter(event) {
       saveHighscore();
 }
 
-// user clicks button to submit initials
-submitBtn.onclick = saveHighscore;
+// user clicks button to submit name
+submitBtnEId.onclick = saveHighscore;
 
 // user clicks button to start quiz
-startBtn.onclick = startQuiz;
+startBtnEId.onclick = startQuiz;
 
-initialsEl.onkeyup = checkForEnter;
+nameEId.onkeyup = checkForEnter;

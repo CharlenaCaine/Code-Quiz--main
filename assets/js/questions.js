@@ -15,17 +15,17 @@ const questions = [
         answer: "quotes"
     },
     {
-       title: "A very useful tool for used during development and debugging for printing content to the debugger is:",
+       title: "A very useful tool for testing used during development and debugging for printing content to the debugger is:",
         choices: ["Javascript", "terminal / bash", "for loops", "console log"],
         answer: "console log"
     },
     {
-        title: "Which of the below CSS properties is used to change the background color of CSS ?",
+        title: "Which of the below CSS properties is used to change the background color of CSS?",
         choices: ["bg color", "color-background", "background-color", "color"],
         answer: "background-color"
     },
     {
-        title: "Which of the below CSS class is used to change the text color of CSS ?",
+        title: "Which of the below CSS class is used to change the text color of CSS?",
         choices: ["background-color", "color", "color-background", "None of the above"],
         answer: "color"
     },
@@ -35,9 +35,9 @@ const questions = [
         answer: "text-indent property"
     },
     {
-        title: "When interpreter encounters an empty statements, what it will do:",
+        title: "When interpreter encounters an empty statements, what it will do?",
         choices: ["Shows a warning", "Prompts to complete the statement", "Throws an error", "Ignores the statements"],
-        answer: "<a>"
+        answer: "Ignores the statements"
     },
     {
         title: "In JavaScript, what is a block of statement?",
