@@ -96,11 +96,11 @@ function questionClick(answerChoice) {
     sfxRight.play();
   }
 
-  // flash right/wrong feedback on page for half a second
+  // flash right/wrong feedback on page for a second
   feedbackEId.setAttribute("class", "feedback");
   setInterval(function(){
     feedbackEId.setAttribute("class", "feedback hide");
-  }, 500);
+  }, 1000);
 
   // move to next question
   currentQuestionIndex++;
